@@ -1,0 +1,17 @@
+-----------Built-in python functions for numbers.---------------------
+
+abs(x) Returns the absoulute of number x(converts negative numbers to postivive.)
+bin(x) Returns a string representing the value of x converted to binary.
+float(x) Converts a string or number x to a the float data type.
+format(x, y) Returns x formatted as directed by format string y. In modern python youre more likely to use f-strings.
+hex(x) Returns a string containing x converted to hexadecimal, prefixed with 0x
+int(x) Converts x to the integer data type by truncating (not rounding) the deciaml point and the digits after it.
+max(x,y,z ...) Takes any number of numeric arguments and returns whichever one is largest.
+min(x,y,z ...) Takes any number of numeric arguments and returns whichever one is smallest.
+oct(x) Converts x to an octal number, prefixed with 0o to indicate octal.
+round(x, y) Rounds number x to y decimal places.
+str(x) Converts number x to the string data type.
+type(x) Returns a string indicating the data type of x.
+
+--------------------Functions from the python math module.-----------------
+
