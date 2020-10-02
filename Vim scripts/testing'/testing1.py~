@@ -1,0 +1,8 @@
+import math
+
+a = 1238
+b = 2387
+
+for i in range(10):
+    print(oct(a))
+    print(bin(b))
