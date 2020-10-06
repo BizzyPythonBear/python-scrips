@@ -2,6 +2,7 @@ import pygame
 import time
 import sys
 from pygame import *
+import simpleaudio as sa
 
 winHeight = 500
 winWidth = 500
@@ -17,7 +18,7 @@ flags = 0
 gameRunning = True
 screen = pygame.display.set_mode(display, flags, depth)
 
-playerObj = playerClass(0,100)
+jumpsfx = sa.WaveObject.from_wave_file("ya.wav")
 
 def main():
     playerObj = playerClass(0,100)
@@ -59,7 +60,7 @@ def main():
                 pygame.quit()
             if event.type == KEYDOWN:
                 if event.key == K_UP:
-                    upKey = True                    
+                    upKey = True
                 if event.key == K_DOWN:
                     downKey = True                   
                 if event.key == K_RIGHT:
@@ -69,7 +70,7 @@ def main():
                     
             if event.type == KEYUP:
                 if event.key == K_UP:
-                    upKey = False                   
+                    upKey = False
                 if event.key == K_DOWN:
                     downKey = False                    
                 if event.key == K_RIGHT:
@@ -127,7 +128,8 @@ class playerClass(entity):
         self.onGround = False
     def update(self, upKey, downKey, leftKey, rightKey, platforms):
         if upKey and self.onGround:
-            self.yVel -= gravity              
+            self.yVel -= gravity
+            playObj = jumpsfx.play()
         if rightKey:
             if self.xVel < 6:
                 self.xVel += 1
@@ -141,14 +143,17 @@ class playerClass(entity):
 
         if not self.onGround and self.yVel < 100:
             self.yVel += 0.5
-        if self.yVel > 50:
-            playerObj.positon(0, 100)
-
+  
         self.rect.left += self.xVel
         self.collide(self.xVel, 0, platforms)
         self.rect.top += self.yVel
         self.onGround = False
         self.collide(0, self.yVel, platforms)
+
+        if self.yVel > 35:
+            print("Respawn!")
+            playerObj(0, 100)
+            
     def collide(self, xVelDelta, yVelDelta, platforms):
         for i in platforms:
             if pygame.sprite.collide_rect(self, i):
